@@ -31,5 +31,5 @@ export interface IRecipeResponse {
 
 
 export interface IAreaResponse {
-  areas: IArea[]
+  meals: IArea[]
 }

@@ -1,12 +1,21 @@
 import { IngredientMeasure } from "./../../types/recipe.types";
 import { IRecipe } from "../../types/recipe.types";
 
-export const convertDataToSelectInput = <T>(data: T) => {
+export const convertDataToSelectInput = <T>(
+  data: T[] | undefined,
+  valueKey: keyof T,
+  labelKey: keyof T
+) => {
   //  console.log(data);
 
   if (!data) {
     return [];
   }
+
+  return data.map((item) => ({
+    value: item[valueKey],
+    label: item[labelKey],
+  }));
 };
 
 export const getIngredientsAndMeasures = (recipe: IRecipe) => {

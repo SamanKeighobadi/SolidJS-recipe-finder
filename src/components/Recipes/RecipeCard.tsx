@@ -1,5 +1,8 @@
 import { A } from "@solidjs/router";
+import { Show } from "solid-js";
+// ****** Types ****** //
 import { IRecipe } from "../../../types/recipe.types";
+// ****** Custom Components ****** //
 import CategoryIcon from "../../assets/Icons/CategoryIcon";
 import WorldIcon from "../../assets/Icons/WorldIcon";
 import TagsIcon from "../../assets/Icons/TagsIcon";
@@ -23,10 +26,12 @@ const RecipeCard = (props: IRecipe) => {
             <span class="pl-2">{props.strCategory}</span>
           </div>
         </div>
-        <div class="flex items-center">
-          <TagsIcon />
-          <span class="pl-2">{props.strTags}</span>
-        </div>
+        <Show when={props.strTags}>
+          <div class="flex items-center">
+            <TagsIcon />
+            <span class="pl-2">{props.strTags}</span>
+          </div>
+        </Show>
         <div class="card-actions justify-end">
           <button class="btn btn-primary">
             <A href={`/recipe/${props.idMeal}`}>More</A>

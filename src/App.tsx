@@ -1,11 +1,10 @@
-import {  type Component } from "solid-js";
-
+import { type Component } from "solid-js";
+import { FilterContextProvider } from "./context/FilterContext";
 
 const App: Component = (props) => {
   return (
     <div class="p-4">
-      {/* <Routes></Routes> */}
-      {props.children}
+      <FilterContextProvider>{props.children}</FilterContextProvider>
     </div>
   );
 };

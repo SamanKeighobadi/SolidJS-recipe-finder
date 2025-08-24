@@ -1,4 +1,4 @@
-import { useParams } from "@solidjs/router";
+import { A, useParams } from "@solidjs/router";
 import { createResource, For, Match, Show, Switch } from "solid-js";
 import { getRecipeByID } from "../../services/recipe.services";
 import WorldIcon from "../assets/Icons/WorldIcon";
@@ -45,15 +45,21 @@ const RecipeDetails = () => {
               </div>
             </div>
 
+            <div class="mb-3">
+              <a href={recipe()?.meals[0]?.strYoutube} target="_blank">
+                <button class="btn btn-secondary">Watch on Youtube</button>
+              </a>
+            </div>
+
             <div>
               <p>{recipe()?.meals[0]?.strInstructions}</p>
             </div>
 
-            {JSON.stringify(getIngredientsAndMeasures(recipe()?.meals[0]))}
+            {JSON.stringify(getIngredientsAndMeasures(recipe()?.meals[0]!))}
             <div class="mb-4">
               <h3 class="text-2xl mb-2">Ingredients</h3>
               <ul class="list-disc pl-5">
-                <For each={getIngredientsAndMeasures(recipe()?.meals[0])}>
+                <For each={getIngredientsAndMeasures(recipe()?.meals[0]!)}>
                   {(item) => (
                     <li>
                       {item.measure} {item.ingredient}
