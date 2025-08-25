@@ -1,18 +1,24 @@
-import { createEffect, createResource, createSignal } from "solid-js";
+import { createResource } from "solid-js";
 import { getRecipes } from "../../services/recipe.services";
 // ****** Custom Components ****** //
 import FilterSidebar from "../components/Filter/FilterSIdebar";
 import RecipeCard from "../components/Recipes/RecipeCard";
+// ****** Utils ****** //
 import { createDebouncedSignal } from "../utils";
+// ****** Context API ****** //
 import { useFilters } from "../context/FilterContext";
 
 const Home = () => {
   const [source, setSource, debounced] = createDebouncedSignal("", 500);
   const { area, category } = useFilters();
 
-  createEffect(() => console.log(area(), category()), [area, category]);
-
-  const [recipes] = createResource(debounced, getRecipes);
+  const [recipes] = createResource(
+    () => ({
+      search: debounced(),
+      filters: { category: category(), area: area() },
+    }),
+    ({ search, filters }) => getRecipes(search, filters)
+  );
 
   return (
     <div>

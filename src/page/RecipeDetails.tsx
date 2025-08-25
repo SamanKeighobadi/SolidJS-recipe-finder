@@ -1,10 +1,13 @@
-import { A, useParams } from "@solidjs/router";
+import {  useParams } from "@solidjs/router";
 import { createResource, For, Match, Show, Switch } from "solid-js";
+// ****** Services ****** //
 import { getRecipeByID } from "../../services/recipe.services";
+// ****** Utils ****** //
+import { getIngredientsAndMeasures } from "../helpers";
+// ****** Custom Components ****** //
 import WorldIcon from "../assets/Icons/WorldIcon";
 import CategoryIcon from "../assets/Icons/CategoryIcon";
 import TagsIcon from "../assets/Icons/TagsIcon";
-import { getIngredientsAndMeasures } from "../helpers";
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -55,7 +58,6 @@ const RecipeDetails = () => {
               <p>{recipe()?.meals[0]?.strInstructions}</p>
             </div>
 
-            {JSON.stringify(getIngredientsAndMeasures(recipe()?.meals[0]!))}
             <div class="mb-4">
               <h3 class="text-2xl mb-2">Ingredients</h3>
               <ul class="list-disc pl-5">

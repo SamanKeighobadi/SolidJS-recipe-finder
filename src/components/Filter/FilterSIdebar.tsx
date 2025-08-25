@@ -1,8 +1,12 @@
 import { createResource } from "solid-js";
-import Select from "../UI/Select";
+// ****** Services ****** //
 import { getAllAreas, getCategories } from "../../../services/recipe.services";
+// ****** Utils ****** //
 import { convertDataToSelectInput } from "../../helpers";
+// ****** Context API ****** //
 import { useFilters } from "../../context/FilterContext";
+// ****** Custom Components ****** //
+import Select from "../UI/Select";
 
 const FilterSidebar = () => {
   const [categories] = createResource(getCategories);
@@ -13,7 +17,7 @@ const FilterSidebar = () => {
   const convertedCategories = () =>
     convertDataToSelectInput(
       categories()?.categories,
-      "idCategory",
+      "strCategory",
       "strCategory"
     );
 
@@ -23,7 +27,7 @@ const FilterSidebar = () => {
   return (
     <div class="shadow-lg py-6 rounded-md px-3 fixed w-[100%] mt-20 ">
       <div>
-        <p  class="text-2xl font-bold">Filters</p>
+        <p class="text-2xl font-bold">Filters</p>
       </div>
       <div>
         <Select
@@ -46,7 +50,6 @@ const FilterSidebar = () => {
         />
       </div>
       <div class="pt-3">
-        <button class="btn btn-primary mr-2">Apply</button>
         {area() || category() ? (
           <button class="btn btn-secondary" onClick={clearFilters}>
             Clear

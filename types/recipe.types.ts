@@ -33,3 +33,8 @@ export interface IRecipeResponse {
 export interface IAreaResponse {
   meals: IArea[]
 }
+
+export interface IRecipeFilters {
+  category: string;
+  area: string;
+}
